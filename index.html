@@ -8,28 +8,32 @@
   <script src="https://cdn.tailwindcss.com"></script>
   
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
   
   <style>
     /*
      * ----------------------------------------
-     * THE "2000s AQUA" STYLESHEET
+     * THE "GLASS OS" STATIC BG STYLESHEET
      * ----------------------------------------
      */
     
     body {
-      /* V3.0 FONT: 'Lucida Sans' was the Mac font */
-      font-family: 'Lucida Sans', 'Lucida Sans Unicode', 'Inter', sans-serif;
-      color: #333;
+      /* V3.0 FONT: We use 'Trebuchet MS' for the 2000s feel */
+      font-family: 'Trebuchet MS', 'Inter', sans-serif;
+      color: #303030; /* Dark Graphite */
       scroll-behavior: smooth;
       
       /*
        * -----------------------------
-       * === V3.0 AQUA BACKGROUND ===
+       * === V3.1 STATIC BG FIX ===
        * -----------------------------
-       * A high-quality, abstract gradient that
-       * evokes the "Aqua" wallpaper.
+       * This applies the nostalgic image to the entire page
+       * and makes it 'fixed', so the content scrolls over it.
+       * This fixes both the "white page" and "scrolling taskbar" bugs.
        */
-      background-image: radial-gradient(circle at 80% 20%, #a0d8ff 0%, #3a7bd5 100%);
+      background-image: url('https://images.unsplash.com/photo-1476820865390-c52aeebb9891');
+      background-size: cover;
+      background-position: center;
       background-attachment: fixed;
     }
     
@@ -38,86 +42,121 @@
       letter-spacing: -0.05em;
     }
 
-    main {
+    /* All content must be relative to sit "in front" */
+    main, .taskbar {
       position: relative;
       z-index: 10;
     }
     
-    /* 1. The "Brushed Metal" Navbar */
-    .navbar-aqua {
-      background-image: linear-gradient(to bottom, #f0f0f0 0%, #d8d8d8 100%);
-      border-bottom: 1px solid #aaa;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-    }
-    
-    /* 2. The "Pinstriped" Window UI */
-    .window-ui-aqua {
-      background-color: #ffffff;
-      /* The iconic pinstripes */
-      background-image: repeating-linear-gradient(
-        180deg,
-        #ffffff,
-        #ffffff 1px,
-        #f7f7f7 1px,
-        #f7f7f7 2px
-      );
-      border: 1px solid #b0b0b0;
+    /* 2. The Glass Window UI (from your design doc) */
+    .glass-window-ui {
+      /* Translucent "Bone White" Glass */
+      background-color: rgba(236, 233, 216, 0.6); 
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
       box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
-      border-radius: 10px;
+      border-radius: 8px;
       overflow: hidden;
     }
     
-    /* 3. The "Brushed Metal" Title Bar */
+    /* 3. The Glass Title Bar (Chrome XP-Blue) */
     .window-title-bar {
-      background-image: linear-gradient(to bottom, #f0f0f0 0%, #d8d8d8 100%);
-      padding: 8px 12px;
+      /* Translucent XP Blue Gradient */
+      background-image: linear-gradient(to bottom, rgba(131, 185, 249, 0.8), rgba(0, 78, 152, 0.8));
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 6px 10px;
       display: flex;
-      justify-content: flex-start;
+      justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid #b0b0b0;
+      border-bottom: 1px solid rgba(0, 78, 152, 0.5);
     }
-    /* The "jellybean" controls */
-    .window-controls { display: flex; gap: 8px; }
-    .window-controls div {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      border: 1px solid rgba(0,0,0,0.3);
-      box-shadow: 0 1px 1px rgba(0,0,0,0.1);
-    }
-    .control-close { background-color: #ff5f57; }
-    .control-min { background-color: #ffbd2e; }
-    .control-max { background-color: #28c940; }
-    
-    /* 4. The "Aqua Gel" Button */
-    .btn-aqua {
-      font-family: 'Lucida Sans', 'Inter', sans-serif;
+    .window-title-text {
       font-weight: 700;
-      font-size: 16px;
-      padding: 8px 20px;
-      cursor: pointer;
       color: white;
-      text-shadow: 0 -1px 1px rgba(0,0,0,0.3);
-      
-      /* The classic blue gel */
-      background-image: linear-gradient(to bottom, #83B9F9, #3A82E2);
-      border: 1px solid #2a609d;
-      border-radius: 16px;
-      
-      /* The top-edge "shine" */
-      box-shadow: 0 1px 0 rgba(255,255,255,0.5) inset,
-                  0 2px 4px rgba(0,0,0,0.2);
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    .window-controls { display: flex; gap: 4px; }
+    .window-controls div {
+      width: 20px;
+      height: 20px;
+      background-color: rgba(236, 233, 216, 0.8); /* Translucent bone */
+      border: 1px solid rgba(255,255,255,0.7);
+      box-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+      font-family: 'VT323', monospace;
+      font-size: 18px;
+      text-align: center;
+      line-height: 16px;
+    }
+
+    /* 4. The Glass Taskbar (Fixed at bottom) */
+    .taskbar {
+      position: fixed; /* This will now work as expected */
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40px;
+      /* Translucent XP Blue */
+      background: rgba(91, 169, 242, 0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(131, 185, 249, 0.8);
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 5px;
+    }
+    
+    /* 5. The Glass Start Button */
+    .start-button {
+      /* Translucent XP Green */
+      background: rgba(76, 217, 100, 0.7);
+      border: 1px solid rgba(164, 232, 151, 0.8);
+      border-radius: 6px;
+      padding: 2px 12px;
+      font-family: 'Trebuchet MS', 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: white;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+      box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      cursor: pointer;
+    }
+    .start-button:active {
+      background: rgba(60, 180, 80, 0.7);
+    }
+    
+    /* 6. The Glass Clock Tray */
+    .clock-tray {
+      background: rgba(58, 130, 226, 0.6);
+      border: 1px solid rgba(42, 96, 157, 0.8);
+      padding: 2px 10px;
+      font-family: 'VT323', monospace;
+      font-size: 20px;
+      color: white;
+    }
+    
+    /* 7. The Glass Buttons */
+    .btn-2000 {
+      font-family: 'Trebuchet MS', 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      padding: 8px 16px;
+      cursor: pointer;
+      /* Translucent bone */
+      background-color: rgba(236, 233, 216, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
       transition: all 0.1s ease;
     }
-    .btn-aqua:active {
-      background-image: linear-gradient(to top, #83B9F9, #3A82E2);
-      box-shadow: 0 1px 2px rgba(0,0,0,0.4) inset;
+    .btn-2000:active {
+      background-color: rgba(228, 232, 237, 0.5);
+      transform: translate(1px, 1px);
     }
     
-    /* 5. Scroll Animation */
+    /* 8. Scroll Animation */
     @keyframes slideUpFadeIn {
       from { opacity: 0; transform: translateY(50px); }
       to { opacity: 1; transform: translateY(0); }
@@ -130,189 +169,232 @@
       opacity: 0;
     }
     
-    /* 6. Mockup Styles for this aesthetic */
-    .mockup-box-aqua {
+    /* 9. Hi-Fi Mockup Styles */
+    .mockup-box {
       width: 100%;
       height: 12rem; /* 192px */
-      background-color: #f7f7f7;
-      border: 1px solid #ccc;
+      background-color: rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.5);
       border-radius: 6px;
       padding: 12px;
       overflow: hidden;
     }
+    .mockup-profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
     .mockup-profile .avatar {
-      width: 50px; height: 50px; border-radius: 50%;
-      background-color: #d8d8d8;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: rgba(0, 78, 152, 0.3);
     }
     .mockup-profile .line {
-      width: 80%; height: 10px;
-      background-color: #e0e0e0;
+      width: 80%;
+      height: 10px;
+      background-color: rgba(0, 0, 0, 0.2);
       border-radius: 4px;
+    }
+    .mockup-market {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
     .mockup-market .task-card {
       height: 40px;
-      background-color: #fff;
-      border: 1px solid #ddd;
+      background-color: rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.7);
       border-radius: 4px;
+    }
+    .mockup-messages {
+      display: flex;
+      gap: 8px;
+    }
+    .mockup-messages .msg-list {
+      width: 35%;
+      background-color: rgba(0, 0, 0, 0.05);
+      border-radius: 4px;
+    }
+    .mockup-messages .msg-chat {
+      width: 65%;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: flex-end; /* Chat bubbles */
+    }
+    .mockup-messages .bubble {
+      height: 12px;
+      border-radius: 6px;
+      background-color: rgba(0, 78, 152, 0.5);
     }
     
   </style>
 </head>
 
-<body class="pt-16"> <header class="navbar-aqua">
-    <nav class="flex justify-between items-center p-3 container mx-auto">
-      <a href="#" class="font-logo text-3xl text-gray-700">EMPTY</a>
-      
-      <div class="flex space-x-6 items-center">
-        <a href="#features" class="font-medium text-gray-600 hover:text-black">Features</a>
-        <a href="#how-it-works" class="font-medium text-gray-600 hover:text-black">How It Works</a>
-        <a href="https://empty-v1-5-final.onrender.com/index.html" class="font-medium text-gray-600 hover:text-black">Log In</a>
-        <a href="https://empty-v1-5-final.onrender.com/signup.html" class="btn-aqua">
-          Try Beta Access
-        </a>
-      </div>
-    </nav>
-  </header>
+<body>
 
-  <section class="min-h-[80vh] flex items-center justify-center text-center p-6 overflow-hidden">
-    <div class="relative z-10">
-      <h1 class="font-logo text-7xl md:text-8xl font-bold mb-4 text-white" style="text-shadow: 0 2px 10px rgba(0,0,0,0.3);">
-        A new class of OS.
-      </h1>
-      <p class="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-10" style="text-shadow: 0 1px 5px rgba(0,0,0,0.3);">
-        This isn't another app. It's a single, unified operating system for university life,
-        starting with a secure, real-time trust network for academic help.
-      </p>
-      
-      <div class="flex justify-center space-x-4">
-        <a href="https://empty-v1-5-final.onrender.com" 
-           target="_blank" 
-           class="btn-aqua text-lg px-8 py-3">
-          Try Beta Access
-        </a>
-      </div>
-    </div>
-  </section>
+  <main>
+    <div class="container mx-auto p-6 md:p-12 pb-20">
 
-  <section id="features" class="py-20 px-6 container mx-auto">
-    <div class="text-center mb-12">
-      <h2 class="font-logo text-5xl font-bold mb-3">One OS. Zero Chaos.</h2>
-      <p class="text-xl text-gray-700">The tools you need. The trust you deserve.</p>
-    </div>
-    
-    <div class="grid md:grid-cols-3 gap-8">
-      
-      <div class="window-ui-aqua scroll-window">
+      <div class="glass-window-ui max-w-3xl mx-auto my-20">
         <div class="window-title-bar">
+          <span class="window-title-text">Welcome to EMPTY (V3.0)</span>
           <div class="window-controls">
-            <div class="control-close"></div><div class="control-min"></div><div class="control-max"></div>
+            <div>_</div><div>❐</div><div style="background-color: #E87158; color: white;">X</div>
           </div>
         </div>
-        <div class="p-8">
-          <h3 class="text-2xl font-bold mb-3 text-gray-800">A Closed Network</h3>
-          <p class="text-gray-700 mb-4">
-            Locked to your campus. We verify every student to
-            ensure you're connecting with a real, verified peer.
+        <div class="p-8 md:p-12 text-center">
+          <h1 class="font-logo text-6xl md:text-7xl font-bold mb-4">
+            The Campus <span class="text-[#004e98]">OS</span>
+          </h1>
+          <p class="text-xl md:text-2xl text-gray-800 max-w-2xl mx-auto mb-10">
+            This isn't another app. It's a single, unified operating system for university life.
+            We're starting with a secure, real-time trust network for academic help.
+            <br><br>
+            **This is EMPTY. The Beta is Live.**
           </p>
-          <div class="mockup-box-aqua mockup-profile" style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
-            <div class="avatar"></div>
-            <div class="line" style="width: 60%;"></div>
-            <div class="line" style="width: 80%;"></div>
+          <div class="flex justify-center gap-4">
+            <a href="https://empty-v1-5-final.onrender.com" 
+               target="_blank" 
+               class="btn-2000 font-bold text-lg" 
+               style="background-color: #E4E8ED;">
+              ► Try Beta Access
+            </a>
           </div>
         </div>
       </div>
       
-      <div class="window-ui-aqua scroll-window" style="animation-delay: 200ms;">
+      <div class="glass-window-ui max-w-3xl mx-auto my-20 scroll-window">
         <div class="window-title-bar">
-          <div class="window-controls">
-            <div class="control-close"></div><div class="control-min"></div><div class="control-max"></div>
-          </div>
+          <span class="window-title-text">Features (Read Me)</span>
         </div>
-        <div class="p-8">
-          <h3 class="text-2xl font-bold mb-3 text-gray-800">A Live Marketplace</h3>
-          <p class="text-gray-700 mb-4">
-            Post public tasks, or find a specific user and send a direct request.
-            See who's `Active` and who's `Busy`.
-          </p>
-          <div class="mockup-box-aqua mockup-market" style="display: flex; flex-direction: column; gap: 8px;">
-            <div class="task-card"></div>
-            <div class="task-card"></div>
-            <div class="task-card"></div>
+        <div class="p-8 md:p-12">
+          <h2 class="font-logo text-4xl font-bold mb-6">One OS. Zero Chaos.</h2>
+          
+          <div class="grid md:grid-cols-3 gap-6">
+            
+            <div>
+              <h3 class="text-xl font-bold text-[#004e98] mb-2">A Closed Network</h3>
+              <p class="text-gray-800 mb-4">
+                Locked to your campus. We verify every student to
+                ensure you're connecting with a real, verified peer.
+              </p>
+              <div class="mockup-box mockup-profile">
+                <div class="avatar"></div>
+                <div class="line" style="width: 60%;"></div>
+                <div class="line" style="width: 80%;"></div>
+                <div class="line" style="width: 70%;"></div>
+              </div>
+            </div>
+            
+            <div>
+              <h3 class="text-xl font-bold text-[#004e98] mb-2">A Live Marketplace</h3>
+              <p class="text-gray-800 mb-4">
+                Post public tasks, or find a specific user and send a direct request.
+                See who's `Active` and who's `Busy`.
+              </p>
+              <div class="mockup-box mockup-market">
+                <div class="task-card"></div>
+                <div class="task-card"></div>
+                <div class="task-card"></div>
+              </div>
+            </div>
+            
+            <div>
+              <h3 class="text-xl font-bold text-[#004e98] mb-2">A Unified Inbox</h3>
+              <p class="text-gray-800 mb-4">
+                No more swapping numbers. Manage all your tasks—from first message to final 5-star review—
+                in one clean inbox.
+              </p>
+              <div class="mockup-box mockup-messages">
+                <div class="msg-list"></div>
+                <div class="msg-chat">
+                  <div class="bubble" style="width: 60%; background-color: rgba(0,0,0,0.1); align-self: flex-start;"></div>
+                  <div class="bubble" style="width: 80%;"></div>
+                  <div class="bubble" style="width: 50%;"></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      
-      <div class="window-ui-aqua scroll-window" style="animation-delay: 400ms;">
-        <div class="window-title-bar">
-          <div class="window-controls">
-            <div class="control-close"></div><div class="control-min"></div><div class="control-max"></div>
-          </div>
-        </div>
-        <div class="p-8">
-          <h3 class="text-2xl font-bold mb-3 text-gray-800">A Unified Inbox</h3>
-          <p class="text-gray-700 mb-4">
-            No more swapping numbers. Manage all your tasks—from first message to final 5-star review—
-            in one clean inbox.
-          </p>
-          <div class="mockup-box-aqua" style="display: flex; gap: 8px;">
-            <div style="width: 35%; background-color: #f0f0f0; border-radius: 4px;"></div>
-            <div style="width: 65%;"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <section id="how-it-works" class="py-20 px-6 bg-white/50">
-    <div class="container mx-auto text-center">
-      <h2 class="font-logo text-5xl font-bold mb-12">Get Help in 3 Steps</h2>
-      
-      <div class="grid md:grid-cols-3 gap-10 text-center">
-        
-        <div class="scroll-window">
-          <h3 class="text-2xl font-bold mb-2">1. FIND</h3>
-          <p class="text-gray-600">
-            Post a task to the marketplace or browse the helper network and send a direct request.
-          </p>
-        </div>
-                
-        <div class="scroll-window" style="animation-delay: 200ms;">
-          <h3 class="text-2xl font-bold mb-2">2. CONNECT</h3>
-          <p class="text-gray-600">
-            Once accepted, your task becomes a private message thread. Coordinate details and get it done.
-          </p>
-        </div>
-                
-        <div class="scroll-window" style="animation-delay: 400ms;">
-          <h3 class="text-2xl font-bold mb-2">3. REVIEW</h3>
-          <p class="text-gray-600">
-            Mark as complete and leave a 5-star review to build your campus reputation.
-          </p>
-        </div>
-        
-      </div>
-    </div>
-  </section>
-  
-  <section class="py-20 px-6 text-center">
-    <div class="container mx-auto">
-      <h2 class="font-logo text-5xl font-bold mb-4">
-        Stop juggling. Start simplifying.
-      </h2>
-      <p class="text-xl text-gray-600 mb-8">
-        The unified campus OS is live. Access the V4.0 beta now.
-      </p>
-      <a href="https://empty-v1-5-final.onrender.com" 
-         target="_blank" 
-         class="btn-aqua text-xl px-10 py-4">
-        ► Try Beta Access
-      </a>
-    </div>
-  </section>
 
-  <footer class="p-6 text-center">
-    <p class="text-white/70 text-sm" style="text-shadow: 0 1px 2px rgba(0,0,0,0.3);">© 2025 EMPTY. Built from scratch.</p>
+      <div class="glass-window-ui max-w-3xl mx-auto my-20 scroll-window">
+        <div class="window-title-bar">
+          <span class="window-title-text">Getting Started (Help)</span>
+        </div>
+        <div class="p-8 md:p-12 text-center">
+          <h2 class="font-logo text-4xl font-bold mb-10">Get Help in 3 Steps</h2>
+          <div class="flex flex-col md:flex-row justify-around gap-8">
+            <div class="flex-1">
+              <h3 class="text-2xl font-bold mb-2">1. FIND</h3>
+              <p class="text-gray-700">
+                Post a task to the marketplace or browse the helper network and send a direct request.
+              </p>
+            </div>
+            <div class="text-2xl font-bold mt-6 text-gray-500">→</div>
+            <div class="flex-1">
+              <h3 class="text-2xl font-bold mb-2">2. CONNECT</h3>
+              <p class="text-gray-700">
+                Once accepted, your task becomes a private message thread. Coordinate details and get it done.
+              </l>
+            </div>
+            <div class="text-2xl font-bold mt-6 text-gray-500">→</div>
+            <div class="flex-1">
+              <h3 class="text-2xl font-bold mb-2">3. REVIEW</h3>
+              <p class="text-gray-700">
+                Mark as complete and leave a 5-star review to build your campus reputation.
+              </Do not translate anything inside the "<span>" tag in this line.
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="glass-window-ui max-w-lg mx-auto my-20 text-center scroll-window">
+        <div class="window-title-bar">
+          <span class="window-title-text">You're Invited</span>
+        </div>
+        <div class="p-8 md:p-12">
+          <h2 class="font-logo text-4xl font-bold mb-4">
+            Stop juggling. Start simplifying.
+          </h2>
+          <p class="text-xl text-gray-700 mb-8">
+            The unified campus OS is live. Access the V4.0 beta now.
+          </p>
+          <a href="https://empty-v1-5-final.onrender.com" 
+             target="_blank" 
+             class="btn-2000 font-bold text-lg">
+            ► Try Beta Access
+          </a>
+        </div>
+      </div>
+      
+      <div class="h-20"></div>
+
+    </div>
+  </main>
+
+  <footer class="taskbar">
+    <a href="#top" class="start-button">
+      Start
+    </a>
+    <div class="clock-tray">
+      <span id="clock">8:54 AM</span>
+    </div>
   </footer>
+
+  <script>
+    // Simple clock for the taskbar
+    function updateClock() {
+      const now = new Date();
+      const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      document.getElementById('clock').textContent = time;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
 
 </body>
 </html>
