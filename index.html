@@ -153,6 +153,75 @@
       animation-range-end: 450px;
       opacity: 0;
     }
+    
+    /*
+     * -----------------------------------
+     * === V3.1 NEW MOCKUP STYLES ===
+     * -----------------------------------
+     */
+    .mockup-box {
+      width: 100%;
+      height: 12rem; /* 192px */
+      background-color: rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 6px;
+      padding: 12px;
+      overflow: hidden;
+    }
+    /* Profile Mockup */
+    .mockup-profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .mockup-profile .avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: rgba(0, 78, 152, 0.3);
+    }
+    .mockup-profile .line {
+      width: 80%;
+      height: 10px;
+      background-color: rgba(0, 0, 0, 0.2);
+      border-radius: 4px;
+    }
+    /* Marketplace Mockup */
+    .mockup-market {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .mockup-market .task-card {
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: 4px;
+    }
+    /* Messages Mockup */
+    .mockup-messages {
+      display: flex;
+      gap: 8px;
+    }
+    .mockup-messages .msg-list {
+      width: 35%;
+      background-color: rgba(0, 0, 0, 0.05);
+      border-radius: 4px;
+    }
+    .mockup-messages .msg-chat {
+      width: 65%;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: flex-end; /* Chat bubbles */
+    }
+    .mockup-messages .bubble {
+      height: 12px;
+      border-radius: 6px;
+      background-color: rgba(0, 78, 152, 0.5);
+    }
+    
   </style>
 </head>
 
@@ -178,7 +247,6 @@
             <br><br>
             **This is EMPTY. The Beta is Live.**
           </p>
-          
           <div class="flex justify-center gap-4">
             <a href="https://empty-v1-5-final.onrender.com" 
                target="_blank" 
@@ -187,7 +255,6 @@
               ► Try Beta Access
             </a>
           </div>
-          
         </div>
       </div>
       
@@ -197,16 +264,20 @@
         </div>
         <div class="p-8 md:p-12">
           <h2 class="font-logo text-4xl font-bold mb-6">One OS. Zero Chaos.</h2>
+          
           <div class="grid md:grid-cols-3 gap-6">
             
             <div>
               <h3 class="text-xl font-bold text-[#004e98] mb-2">A Closed Network</h3>
               <p class="text-gray-800 mb-4">
-                Locked to your campus. We verify every student's counselling code
-                so you *know* you're connecting with a verified peer.
+                Locked to your campus. We verify every student to
+                ensure you're connecting with a real, verified peer.
               </p>
-              <div class="w-full h-32 bg-white/30 border border-white/50 p-2 rounded">
-                <p class="text-gray-700 text-sm">App Mockup: Profile Page</p>
+              <div class="mockup-box mockup-profile">
+                <div class="avatar"></div>
+                <div class="line" style="width: 60%;"></div>
+                <div class="line" style="width: 80%;"></div>
+                <div class="line" style="width: 70%;"></div>
               </div>
             </div>
             
@@ -214,10 +285,12 @@
               <h3 class="text-xl font-bold text-[#004e98] mb-2">A Live Marketplace</h3>
               <p class="text-gray-800 mb-4">
                 Post public tasks, or find a specific user and send a direct request.
-                A real-time list shows who's `Active` and who's `Busy`.
+                See who's `Active` and who's `Busy`.
               </p>
-              <div class="w-full h-32 bg-white/30 border border-white/50 p-2 rounded">
-                <p class="text-gray-700 text-sm">App Mockup: Marketplace Feed</p>
+              <div class="mockup-box mockup-market">
+                <div class="task-card"></div>
+                <div class="task-card"></div>
+                <div class="task-card"></div>
               </div>
             </div>
             
@@ -225,10 +298,15 @@
               <h3 class="text-xl font-bold text-[#004e98] mb-2">A Unified Inbox</h3>
               <p class="text-gray-800 mb-4">
                 No more swapping numbers. Manage all your tasks—from first message to final 5-star review—
-                in one clean, persistent inbox.
+                in one clean inbox.
               </p>
-              <div class="w-full h-32 bg-white/30 border border-white/50 p-2 rounded">
-                <p class="text-gray-700 text-sm">App Mockup: Messages Page</p>
+              <div class="mockup-box mockup-messages">
+                <div class="msg-list"></div>
+                <div class="msg-chat">
+                  <div class="bubble" style="width: 60%; background-color: rgba(0,0,0,0.1); align-self: flex-start;"></div>
+                  <div class="bubble" style="width: 80%;"></div>
+                  <div class="bubble" style="width: 50%;"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -242,32 +320,26 @@
         <div class="p-8 md:p-12 text-center">
           <h2 class="font-logo text-4xl font-bold mb-10">Get Help in 3 Steps</h2>
           <div class="flex flex-col md:flex-row justify-around gap-8">
-            
             <div class="flex-1">
               <h3 class="text-2xl font-bold mb-2">1. FIND</h3>
               <p class="text-gray-700">
                 Post a task to the marketplace or browse the helper network and send a direct request.
               </p>
             </div>
-            
             <div class="text-2xl font-bold mt-6 text-gray-500">→</div>
-            
             <div class="flex-1">
               <h3 class="text-2xl font-bold mb-2">2. CONNECT</h3>
               <p class="text-gray-700">
                 Once accepted, your task becomes a private message thread. Coordinate details and get it done.
               </l>
             </div>
-            
             <div class="text-2xl font-bold mt-6 text-gray-500">→</div>
-            
             <div class="flex-1">
               <h3 class="text-2xl font-bold mb-2">3. REVIEW</h3>
               <p class="text-gray-700">
                 Mark as complete and leave a 5-star review to build your campus reputation.
               </Do not translate anything inside the "<span>" tag in this line.
             </div>
-            
           </div>
         </div>
       </div>
@@ -283,13 +355,11 @@
           <p class="text-xl text-gray-700 mb-8">
             The unified campus OS is live. Access the V4.0 beta now.
           </p>
-          
           <a href="https://empty-v1-5-final.onrender.com" 
              target="_blank" 
              class="btn-2000 font-bold text-lg">
             ► Try Beta Access
           </a>
-          
         </div>
       </div>
       
